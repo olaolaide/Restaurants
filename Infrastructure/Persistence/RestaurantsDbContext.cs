@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Persistence;
 
-internal class RestaurantsDbContext(DbContextOptions<RestaurantsDbContext> options) : DbContext(options)
+public class RestaurantsDbContext(DbContextOptions<RestaurantsDbContext> options) : DbContext(options)
 {
     public DbSet<Restaurant> Restaurants => Set<Restaurant>();
     public DbSet<Dish> Dishes => Set<Dish>();
