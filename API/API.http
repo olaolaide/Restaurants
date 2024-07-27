@@ -1,0 +1,8 @@
+﻿@host = http://localhost
+@port = 5000
+@hostAddress = {{host}}:{{port}}
+
+// Requests
+GET {{hostAddress}}/api/
+Accept: application/json
+
