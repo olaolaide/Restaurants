@@ -1,4 +1,5 @@
 using Infrastructure.Extensions;
+using Infrastructure.Seeders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,10 +8,13 @@ builder.Services.AddInfrastructure(builder.Configuration);
 
 var app = builder.Build();
 
-app.UseHttpsRedirection();
+var scope = app.Services.CreateScope();
+var seeder = scope.ServiceProvider.GetRequiredService<IRestaurantSeeder>();
+await seeder.Seed();
+
 
 app.UseAuthorization();
-
 app.MapControllers();
+
 
 app.Run();

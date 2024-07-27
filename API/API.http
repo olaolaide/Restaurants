@@ -1,8 +1,6 @@
-﻿@host = http://localhost
-@port = 5000
-@hostAddress = {{host}}:{{port}}
+@API_HostAddress = http://localhost:5030
 
-// Requests
-GET {{hostAddress}}/api/
+GET {{API_HostAddress}}/weatherforecast/
 Accept: application/json
 
+###

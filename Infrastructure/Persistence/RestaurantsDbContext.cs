@@ -20,4 +20,4 @@ internal class RestaurantsDbContext(DbContextOptions<RestaurantsDbContext> optio
             .WithOne()
             .HasForeignKey(d => d.RestaurantId);
     }
-}
+}   

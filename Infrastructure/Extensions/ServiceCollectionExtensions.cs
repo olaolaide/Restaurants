@@ -1,4 +1,5 @@
 ﻿using Infrastructure.Persistence;
+using Infrastructure.Seeders;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,5 +14,7 @@ public static class ServiceCollectionExtensions
         {
             options.UseSqlite(configuration.GetConnectionString("DefaultConnection"));
         });
+
+        services.AddScoped<IRestaurantSeeder, RestaurantSeeder>();
     }
 }
