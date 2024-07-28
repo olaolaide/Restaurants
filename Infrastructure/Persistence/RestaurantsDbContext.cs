@@ -1,9 +1,11 @@
 ﻿using Domain.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Persistence;
 
-public class RestaurantsDbContext(DbContextOptions<RestaurantsDbContext> options) : DbContext(options)
+public class RestaurantsDbContext(DbContextOptions<RestaurantsDbContext> options) 
+    : IdentityDbContext<User>(options)
 {
     public DbSet<Restaurant> Restaurants => Set<Restaurant>();
     public DbSet<Dish> Dishes => Set<Dish>();
@@ -20,4 +22,4 @@ public class RestaurantsDbContext(DbContextOptions<RestaurantsDbContext> options
             .WithOne()
             .HasForeignKey(d => d.RestaurantId);
     }
-}   
+}

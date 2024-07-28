@@ -1,5 +1,7 @@
 ﻿using Application.Dishes.Commands.CreateDish;
 using Application.Dishes.Commands.DeleteDish;
+using Application.Dishes.Commands.DeleteDishes;
+using Application.Dishes.Commands.UpdateDish;
 using Application.Dishes.DTOs;
 using Application.Dishes.Queries.GetAllDishes;
 using Application.Dishes.Queries.GetDish;
@@ -35,16 +37,25 @@ public class DishesController(IMediator mediator) : ControllerBase
     }
 
     [HttpPatch("{dishId:int}")]
-    public async Task<IActionResult> UpdateDish(int restaurantId, int dishId, [FromBody] string name)
+    public async Task<IActionResult> UpdateDish(int restaurantId, int dishId, [FromBody] UpdateDishCommand command)
     {
-        return Ok();
+        command.RestaurantId = restaurantId;
+        command.DishId = dishId;
+        await mediator.Send(command);
+        return NoContent();
     }
 
     [HttpDelete("{dishId:int}")]
-    public async Task<IActionResult> DeleteDish(int restaurantId, int dishId)
+    public async Task<IActionResult> DeleteDish([FromRoute] int restaurantId, int dishId)
     {
-        
-        await mediator.Send(new DeleteDishForRestaurantQuery(restaurantId, dishId));
+        await mediator.Send(new DeleteDishForRestaurantCommand(restaurantId, dishId));
+        return NoContent();
+    }
+
+    [HttpDelete]
+    public async Task<IActionResult> DeleteDishes([FromRoute] int restaurantId)
+    {
+        await mediator.Send(new DeleteDishesForRestaurantCommand(restaurantId));
         return NoContent();
     }
 }

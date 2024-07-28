@@ -8,13 +8,13 @@ using Microsoft.Extensions.Logging;
 
 namespace Application.Dishes.Commands.DeleteDish;
 
-public class DeleteDishForRestaurantQueryHandler(
+public class DeleteDishForRestaurantCommandHandler(
     ILogger<GetDishByIdForRestaurantQueryHandler> logger,
     IMapper mapper,
     IDishesRepository dishesRepository,
-    IRestaurantsRepository restaurantsRepository) : IRequestHandler<DeleteDishForRestaurantQuery>
+    IRestaurantsRepository restaurantsRepository) : IRequestHandler<DeleteDishForRestaurantCommand>
 {
-    public async Task Handle(DeleteDishForRestaurantQuery request, CancellationToken cancellationToken)
+    public async Task Handle(DeleteDishForRestaurantCommand request, CancellationToken cancellationToken)
     {
         logger.LogInformation("Deleting dish {DishId} for restaurant {RestaurantId}", request.DishId,
             request.RestaurantId);

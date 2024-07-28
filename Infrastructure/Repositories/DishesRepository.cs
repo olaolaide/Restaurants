@@ -24,4 +24,10 @@ public class DishesRepository(RestaurantsDbContext context) : IDishesRepository
         context.Dishes.Remove(dish);
         await context.SaveChangesAsync();
     }
+
+    public async Task DeleteDishesForRestaurantAsync(List<Dish> dishes)
+    {
+        context.Dishes.RemoveRange(dishes);
+        await context.SaveChangesAsync();
+    }
 }

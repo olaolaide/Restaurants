@@ -14,7 +14,6 @@ public class ErrorHandlingMiddleware(ILogger<ErrorHandlingMiddleware> logger) : 
         catch (NotFoundException notFound)
         {
             context.Response.StatusCode = (int)HttpStatusCode.NotFound;
-            context.Response.ContentType = "application/json";
             await context.Response.WriteAsync(notFound.Message);
             logger.LogWarning(notFound.Message);
         }

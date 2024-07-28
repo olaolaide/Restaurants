@@ -571,3 +571,262 @@ LEFT JOIN "Dishes" AS "d" ON "t"."Id" = "d"."RestaurantId"
 ORDER BY "t"."Id"
 [19:48:38 INF] |Serilog.AspNetCore.RequestLoggingMiddleware| 
 HTTP GET /api/restaurant/1/dishes/ responded 200 in 93.9935 ms
+[20:22:13 WRN] |Microsoft.EntityFrameworkCore.Model.Validation| 
+The entity type 'Address' is an optional dependent using table sharing without any required non shared property that could be used to identify whether the entity exists. If all nullable properties contain a null value in database then an object instance won't be created in the query. Add a required property to create instances with null values for other properties or mark the incoming navigation as required to always create an instance.
+[20:22:14 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (15ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Restaurants" AS "r")
+[20:34:50 INF] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP GET /swagger/index.html responded 200 in 237.4618 ms
+[20:34:50 INF] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP GET /swagger/v1/swagger.json responded 200 in 201.4940 ms
+[20:35:19 INF] |Application.Dishes.Commands.UpdateDish.UpdateDishCommandHandler| 
+Updating dish 1
+[20:35:19 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (32ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "t"."Id", "t"."Category", "t"."ContactEmail", "t"."ContactNumber", "t"."Description", "t"."HasDelivery", "t"."Name", "t"."Address_City", "t"."Address_PostalCode", "t"."Address_Street", "d"."Id", "d"."Description", "d"."KiloCalories", "d"."Name", "d"."Price", "d"."RestaurantId"
+FROM (
+    SELECT "r"."Id", "r"."Category", "r"."ContactEmail", "r"."ContactNumber", "r"."Description", "r"."HasDelivery", "r"."Name", "r"."Address_City", "r"."Address_PostalCode", "r"."Address_Street"
+    FROM "Restaurants" AS "r"
+    WHERE "r"."Id" = @__id_0
+    LIMIT 1
+) AS "t"
+LEFT JOIN "Dishes" AS "d" ON "t"."Id" = "d"."RestaurantId"
+ORDER BY "t"."Id"
+[20:35:20 ERR] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP PATCH /api/restaurant/1/dishes/1 responded 500 in 908.9158 ms
+Domain.Exceptions.NotFoundException: Dish with identifier 1 not found
+   at Application.Dishes.Commands.UpdateDish.UpdateDishCommandHandler.Handle(UpdateDishCommand request, CancellationToken cancellationToken) in D:\Projects\Restaurants\Application\Dishes\Commands\UpdateDish\UpdateDishCommandHandler.cs:line 20
+   at MediatR.Wrappers.RequestHandlerWrapperImpl`1.<>c__DisplayClass1_0.<<Handle>g__Handler|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at API.Controllers.DishesController.UpdateDish(Int32 restaurantId, Int32 dishId, UpdateDishCommand command) in D:\Projects\Restaurants\API\Controllers\DishesController.cs:line 44
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+[20:35:20 WRN] |API.Middleware.ErrorHandlingMiddleware| 
+Dish with identifier 1 not found
+[20:36:09 INF] |Application.Dishes.Commands.UpdateDish.UpdateDishCommandHandler| 
+Updating dish 1
+[20:36:09 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (0ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "t"."Id", "t"."Category", "t"."ContactEmail", "t"."ContactNumber", "t"."Description", "t"."HasDelivery", "t"."Name", "t"."Address_City", "t"."Address_PostalCode", "t"."Address_Street", "d"."Id", "d"."Description", "d"."KiloCalories", "d"."Name", "d"."Price", "d"."RestaurantId"
+FROM (
+    SELECT "r"."Id", "r"."Category", "r"."ContactEmail", "r"."ContactNumber", "r"."Description", "r"."HasDelivery", "r"."Name", "r"."Address_City", "r"."Address_PostalCode", "r"."Address_Street"
+    FROM "Restaurants" AS "r"
+    WHERE "r"."Id" = @__id_0
+    LIMIT 1
+) AS "t"
+LEFT JOIN "Dishes" AS "d" ON "t"."Id" = "d"."RestaurantId"
+ORDER BY "t"."Id"
+[20:36:09 ERR] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP PATCH /api/restaurant/1/dishes/1 responded 500 in 102.8543 ms
+Domain.Exceptions.NotFoundException: Dish with identifier 1 not found
+   at Application.Dishes.Commands.UpdateDish.UpdateDishCommandHandler.Handle(UpdateDishCommand request, CancellationToken cancellationToken) in D:\Projects\Restaurants\Application\Dishes\Commands\UpdateDish\UpdateDishCommandHandler.cs:line 20
+   at MediatR.Wrappers.RequestHandlerWrapperImpl`1.<>c__DisplayClass1_0.<<Handle>g__Handler|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at API.Controllers.DishesController.UpdateDish(Int32 restaurantId, Int32 dishId, UpdateDishCommand command)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+[20:36:09 WRN] |API.Middleware.ErrorHandlingMiddleware| 
+Dish with identifier 1 not found
+[21:45:19 WRN] |Microsoft.EntityFrameworkCore.Model.Validation| 
+The entity type 'Address' is an optional dependent using table sharing without any required non shared property that could be used to identify whether the entity exists. If all nullable properties contain a null value in database then an object instance won't be created in the query. Add a required property to create instances with null values for other properties or mark the incoming navigation as required to always create an instance.
+[21:45:19 WRN] |Microsoft.EntityFrameworkCore.Model.Validation| 
+The entity type 'Address' is an optional dependent using table sharing without any required non shared property that could be used to identify whether the entity exists. If all nullable properties contain a null value in database then an object instance won't be created in the query. Add a required property to create instances with null values for other properties or mark the incoming navigation as required to always create an instance.
+[21:46:45 WRN] |Microsoft.EntityFrameworkCore.Model.Validation| 
+The entity type 'Address' is an optional dependent using table sharing without any required non shared property that could be used to identify whether the entity exists. If all nullable properties contain a null value in database then an object instance won't be created in the query. Add a required property to create instances with null values for other properties or mark the incoming navigation as required to always create an instance.
+[21:46:45 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (10ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*) FROM "sqlite_master" WHERE "name" = '__EFMigrationsHistory' AND "type" = 'table';
+[21:46:45 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*) FROM "sqlite_master" WHERE "name" = '__EFMigrationsHistory' AND "type" = 'table';
+[21:46:45 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+[21:46:45 INF] |Microsoft.EntityFrameworkCore.Migrations| 
+Applying migration '20240728204522_identity'.
+[21:46:45 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AspNetRoles" (
+    "Id" TEXT NOT NULL CONSTRAINT "PK_AspNetRoles" PRIMARY KEY,
+    "Name" TEXT NULL,
+    "NormalizedName" TEXT NULL,
+    "ConcurrencyStamp" TEXT NULL
+);
+[21:46:45 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AspNetUsers" (
+    "Id" TEXT NOT NULL CONSTRAINT "PK_AspNetUsers" PRIMARY KEY,
+    "FirstName" TEXT NULL,
+    "LastName" TEXT NULL,
+    "UserName" TEXT NULL,
+    "NormalizedUserName" TEXT NULL,
+    "Email" TEXT NULL,
+    "NormalizedEmail" TEXT NULL,
+    "EmailConfirmed" INTEGER NOT NULL,
+    "PasswordHash" TEXT NULL,
+    "SecurityStamp" TEXT NULL,
+    "ConcurrencyStamp" TEXT NULL,
+    "PhoneNumber" TEXT NULL,
+    "PhoneNumberConfirmed" INTEGER NOT NULL,
+    "TwoFactorEnabled" INTEGER NOT NULL,
+    "LockoutEnd" TEXT NULL,
+    "LockoutEnabled" INTEGER NOT NULL,
+    "AccessFailedCount" INTEGER NOT NULL
+);
+[21:46:45 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AspNetRoleClaims" (
+    "Id" INTEGER NOT NULL CONSTRAINT "PK_AspNetRoleClaims" PRIMARY KEY AUTOINCREMENT,
+    "RoleId" TEXT NOT NULL,
+    "ClaimType" TEXT NULL,
+    "ClaimValue" TEXT NULL,
+    CONSTRAINT "FK_AspNetRoleClaims_AspNetRoles_RoleId" FOREIGN KEY ("RoleId") REFERENCES "AspNetRoles" ("Id") ON DELETE CASCADE
+);
+[21:46:45 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AspNetUserClaims" (
+    "Id" INTEGER NOT NULL CONSTRAINT "PK_AspNetUserClaims" PRIMARY KEY AUTOINCREMENT,
+    "UserId" TEXT NOT NULL,
+    "ClaimType" TEXT NULL,
+    "ClaimValue" TEXT NULL,
+    CONSTRAINT "FK_AspNetUserClaims_AspNetUsers_UserId" FOREIGN KEY ("UserId") REFERENCES "AspNetUsers" ("Id") ON DELETE CASCADE
+);
+[21:46:45 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AspNetUserLogins" (
+    "LoginProvider" TEXT NOT NULL,
+    "ProviderKey" TEXT NOT NULL,
+    "ProviderDisplayName" TEXT NULL,
+    "UserId" TEXT NOT NULL,
+    CONSTRAINT "PK_AspNetUserLogins" PRIMARY KEY ("LoginProvider", "ProviderKey"),
+    CONSTRAINT "FK_AspNetUserLogins_AspNetUsers_UserId" FOREIGN KEY ("UserId") REFERENCES "AspNetUsers" ("Id") ON DELETE CASCADE
+);
+[21:46:45 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AspNetUserRoles" (
+    "UserId" TEXT NOT NULL,
+    "RoleId" TEXT NOT NULL,
+    CONSTRAINT "PK_AspNetUserRoles" PRIMARY KEY ("UserId", "RoleId"),
+    CONSTRAINT "FK_AspNetUserRoles_AspNetRoles_RoleId" FOREIGN KEY ("RoleId") REFERENCES "AspNetRoles" ("Id") ON DELETE CASCADE,
+    CONSTRAINT "FK_AspNetUserRoles_AspNetUsers_UserId" FOREIGN KEY ("UserId") REFERENCES "AspNetUsers" ("Id") ON DELETE CASCADE
+);
+[21:46:45 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AspNetUserTokens" (
+    "UserId" TEXT NOT NULL,
+    "LoginProvider" TEXT NOT NULL,
+    "Name" TEXT NOT NULL,
+    "Value" TEXT NULL,
+    CONSTRAINT "PK_AspNetUserTokens" PRIMARY KEY ("UserId", "LoginProvider", "Name"),
+    CONSTRAINT "FK_AspNetUserTokens_AspNetUsers_UserId" FOREIGN KEY ("UserId") REFERENCES "AspNetUsers" ("Id") ON DELETE CASCADE
+);
+[21:46:45 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_AspNetRoleClaims_RoleId" ON "AspNetRoleClaims" ("RoleId");
+[21:46:45 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE UNIQUE INDEX "RoleNameIndex" ON "AspNetRoles" ("NormalizedName");
+[21:46:45 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_AspNetUserClaims_UserId" ON "AspNetUserClaims" ("UserId");
+[21:46:45 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_AspNetUserLogins_UserId" ON "AspNetUserLogins" ("UserId");
+[21:46:45 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_AspNetUserRoles_RoleId" ON "AspNetUserRoles" ("RoleId");
+[21:46:45 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "EmailIndex" ON "AspNetUsers" ("NormalizedEmail");
+[21:46:45 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE UNIQUE INDEX "UserNameIndex" ON "AspNetUsers" ("NormalizedUserName");
+[21:46:45 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "ef_temp_Restaurants" (
+    "Id" INTEGER NOT NULL CONSTRAINT "PK_Restaurants" PRIMARY KEY AUTOINCREMENT,
+    "Address_City" TEXT NULL,
+    "Address_PostalCode" TEXT NULL,
+    "Address_Street" TEXT NULL,
+    "Category" TEXT NOT NULL,
+    "ContactEmail" TEXT NULL,
+    "ContactNumber" TEXT NULL,
+    "Description" TEXT NOT NULL,
+    "HasDelivery" INTEGER NOT NULL,
+    "Name" TEXT NOT NULL
+);
+[21:46:45 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "ef_temp_Restaurants" ("Id", "Address_City", "Address_PostalCode", "Address_Street", "Category", "ContactEmail", "ContactNumber", "Description", "HasDelivery", "Name")
+SELECT "Id", "Address_City", "Address_PostalCode", "Address_Street", "Category", "ContactEmail", "ContactNumber", "Description", "HasDelivery", "Name"
+FROM "Restaurants";
+[21:46:45 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+PRAGMA foreign_keys = 0;
+[21:46:45 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DROP TABLE "Restaurants";
+[21:46:45 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE "ef_temp_Restaurants" RENAME TO "Restaurants";
+[21:46:45 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+PRAGMA foreign_keys = 1;
+[21:46:45 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20240728204522_identity', '8.0.7');
+[21:49:34 WRN] |Microsoft.EntityFrameworkCore.Model.Validation| 
+The entity type 'Address' is an optional dependent using table sharing without any required non shared property that could be used to identify whether the entity exists. If all nullable properties contain a null value in database then an object instance won't be created in the query. Add a required property to create instances with null values for other properties or mark the incoming navigation as required to always create an instance.
+[21:49:35 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (31ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Restaurants" AS "r")
+[21:56:00 WRN] |Microsoft.EntityFrameworkCore.Model.Validation| 
+The entity type 'Address' is an optional dependent using table sharing without any required non shared property that could be used to identify whether the entity exists. If all nullable properties contain a null value in database then an object instance won't be created in the query. Add a required property to create instances with null values for other properties or mark the incoming navigation as required to always create an instance.
+[21:56:01 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (14ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Restaurants" AS "r")
+[21:56:17 INF] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP GET /swagger/index.html responded 200 in 170.2544 ms
+[21:56:18 INF] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP GET /swagger/v1/swagger.json responded 200 in 191.7712 ms
+[21:57:56 WRN] |Microsoft.EntityFrameworkCore.Model.Validation| 
+The entity type 'Address' is an optional dependent using table sharing without any required non shared property that could be used to identify whether the entity exists. If all nullable properties contain a null value in database then an object instance won't be created in the query. Add a required property to create instances with null values for other properties or mark the incoming navigation as required to always create an instance.
+[21:57:57 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (33ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Restaurants" AS "r")
