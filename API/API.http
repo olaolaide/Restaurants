@@ -4,3 +4,12 @@ GET {{API_HostAddress}}/restaurants/
 Accept: application/json
 
 ###
+
+POST {{API_HostAddress}}/restaurants/
+
+{
+ "Name"
+}
+
+###
+

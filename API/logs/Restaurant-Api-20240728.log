@@ -1,0 +1,573 @@
+[00:05:31 WRN] |Microsoft.EntityFrameworkCore.Model.Validation| 
+The entity type 'Address' is an optional dependent using table sharing without any required non shared property that could be used to identify whether the entity exists. If all nullable properties contain a null value in database then an object instance won't be created in the query. Add a required property to create instances with null values for other properties or mark the incoming navigation as required to always create an instance.
+[00:05:31 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (15ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Restaurants" AS "r")
+[00:05:55 INF] |Application.Restaurants.Queries.GetRestaurantById.GetRestaurantByIdQueryHandler| 
+Getting restaurant with id 10
+[00:05:55 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (18ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "t"."Id", "t"."Category", "t"."ContactEmail", "t"."ContactNumber", "t"."Description", "t"."HasDelivery", "t"."Name", "t"."Address_City", "t"."Address_PostalCode", "t"."Address_Street", "d"."Id", "d"."Description", "d"."KiloCalories", "d"."Name", "d"."Price", "d"."RestaurantId"
+FROM (
+    SELECT "r"."Id", "r"."Category", "r"."ContactEmail", "r"."ContactNumber", "r"."Description", "r"."HasDelivery", "r"."Name", "r"."Address_City", "r"."Address_PostalCode", "r"."Address_Street"
+    FROM "Restaurants" AS "r"
+    WHERE "r"."Id" = @__id_0
+    LIMIT 1
+) AS "t"
+LEFT JOIN "Dishes" AS "d" ON "t"."Id" = "d"."RestaurantId"
+ORDER BY "t"."Id"
+[00:05:56 INF] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP GET /api/restaurants/10 responded 200 in 958.6579 ms
+[00:19:10 WRN] |Microsoft.EntityFrameworkCore.Model.Validation| 
+The entity type 'Address' is an optional dependent using table sharing without any required non shared property that could be used to identify whether the entity exists. If all nullable properties contain a null value in database then an object instance won't be created in the query. Add a required property to create instances with null values for other properties or mark the incoming navigation as required to always create an instance.
+[00:19:11 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (15ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Restaurants" AS "r")
+[00:19:23 INF] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP GET /swagger/index.html responded 200 in 148.5461 ms
+[00:19:23 INF] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP GET /swagger/v1/swagger.json responded 200 in 200.7959 ms
+[00:19:31 INF] |Application.Restaurants.Queries.GetAllRestaurants.GetAllRestaurantsQueryHandler| 
+Getting all restaurants
+[00:19:31 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "r"."Id", "r"."Category", "r"."ContactEmail", "r"."ContactNumber", "r"."Description", "r"."HasDelivery", "r"."Name", "r"."Address_City", "r"."Address_PostalCode", "r"."Address_Street"
+FROM "Restaurants" AS "r"
+[00:19:32 INF] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP GET /api/restaurants responded 200 in 627.9466 ms
+[00:19:53 INF] |Application.Restaurants.Queries.GetRestaurantById.GetRestaurantByIdQueryHandler| 
+Getting restaurant with id 10
+[00:19:53 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (4ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "t"."Id", "t"."Category", "t"."ContactEmail", "t"."ContactNumber", "t"."Description", "t"."HasDelivery", "t"."Name", "t"."Address_City", "t"."Address_PostalCode", "t"."Address_Street", "d"."Id", "d"."Description", "d"."KiloCalories", "d"."Name", "d"."Price", "d"."RestaurantId"
+FROM (
+    SELECT "r"."Id", "r"."Category", "r"."ContactEmail", "r"."ContactNumber", "r"."Description", "r"."HasDelivery", "r"."Name", "r"."Address_City", "r"."Address_PostalCode", "r"."Address_Street"
+    FROM "Restaurants" AS "r"
+    WHERE "r"."Id" = @__id_0
+    LIMIT 1
+) AS "t"
+LEFT JOIN "Dishes" AS "d" ON "t"."Id" = "d"."RestaurantId"
+ORDER BY "t"."Id"
+[00:19:53 INF] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP GET /api/restaurants/10 responded 200 in 362.7601 ms
+[00:25:49 INF] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP GET /swagger/index.html responded 200 in 0.6357 ms
+[00:25:49 ERR] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP GET /swagger/v1/swagger.json responded 500 in 17.9788 ms
+Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Conflicting method/path combination "GET api/restaurants" for actions - API.Controllers.RestaurantsController.GetRestaurants (API),API.Controllers.RestaurantsController.GetRestaurants (API). Actions require a unique method/path combination for Swagger/OpenAPI 3.0. Use ConflictingActionsResolver as a workaround
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperations(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePaths(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerDocumentWithoutFilters(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerAsync(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+[00:25:49 INF] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP GET /swagger/favicon-32x32.png responded 200 in 11.4487 ms
+[00:25:49 ERR] |Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware| 
+An unhandled exception has occurred while executing the request.
+Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Conflicting method/path combination "GET api/restaurants" for actions - API.Controllers.RestaurantsController.GetRestaurants (API),API.Controllers.RestaurantsController.GetRestaurants (API). Actions require a unique method/path combination for Swagger/OpenAPI 3.0. Use ConflictingActionsResolver as a workaround
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperations(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePaths(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerDocumentWithoutFilters(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerAsync(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+[00:25:52 INF] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP GET /swagger/index.html responded 200 in 8.0212 ms
+[00:25:52 ERR] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP GET /swagger/v1/swagger.json responded 500 in 1.0999 ms
+Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Conflicting method/path combination "GET api/restaurants" for actions - API.Controllers.RestaurantsController.GetRestaurants (API),API.Controllers.RestaurantsController.GetRestaurants (API). Actions require a unique method/path combination for Swagger/OpenAPI 3.0. Use ConflictingActionsResolver as a workaround
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperations(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePaths(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerDocumentWithoutFilters(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerAsync(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+[00:25:52 ERR] |Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware| 
+An unhandled exception has occurred while executing the request.
+Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Conflicting method/path combination "GET api/restaurants" for actions - API.Controllers.RestaurantsController.GetRestaurants (API),API.Controllers.RestaurantsController.GetRestaurants (API). Actions require a unique method/path combination for Swagger/OpenAPI 3.0. Use ConflictingActionsResolver as a workaround
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperations(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePaths(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerDocumentWithoutFilters(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerAsync(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+[00:26:03 WRN] |Microsoft.EntityFrameworkCore.Model.Validation| 
+The entity type 'Address' is an optional dependent using table sharing without any required non shared property that could be used to identify whether the entity exists. If all nullable properties contain a null value in database then an object instance won't be created in the query. Add a required property to create instances with null values for other properties or mark the incoming navigation as required to always create an instance.
+[00:26:04 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (14ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Restaurants" AS "r")
+[00:26:06 INF] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP GET /swagger/index.html responded 200 in 161.6638 ms
+[00:26:06 INF] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP GET /swagger/v1/swagger.json responded 200 in 164.6720 ms
+[00:29:02 INF] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP GET /swagger/index.html responded 200 in 1.1597 ms
+[00:29:03 ERR] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP GET /swagger/v1/swagger.json responded 500 in 12.5227 ms
+Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Conflicting method/path combination "POST api/restaurants" for actions - API.Controllers.RestaurantsController.CreateRestaurant (API),API.Controllers.RestaurantsController.CreateRestaurant (API). Actions require a unique method/path combination for Swagger/OpenAPI 3.0. Use ConflictingActionsResolver as a workaround
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperations(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePaths(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerDocumentWithoutFilters(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerAsync(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+[00:29:03 ERR] |Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware| 
+An unhandled exception has occurred while executing the request.
+Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Conflicting method/path combination "POST api/restaurants" for actions - API.Controllers.RestaurantsController.CreateRestaurant (API),API.Controllers.RestaurantsController.CreateRestaurant (API). Actions require a unique method/path combination for Swagger/OpenAPI 3.0. Use ConflictingActionsResolver as a workaround
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperations(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePaths(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerDocumentWithoutFilters(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerAsync(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+[00:29:17 INF] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP GET /swagger/index.html responded 200 in 0.3170 ms
+[00:29:17 ERR] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP GET /swagger/v1/swagger.json responded 500 in 10.9808 ms
+Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Conflicting method/path combination "POST api/restaurants" for actions - API.Controllers.RestaurantsController.CreateRestaurant (API),API.Controllers.RestaurantsController.CreateRestaurant (API). Actions require a unique method/path combination for Swagger/OpenAPI 3.0. Use ConflictingActionsResolver as a workaround
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperations(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePaths(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerDocumentWithoutFilters(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerAsync(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+[00:29:17 ERR] |Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware| 
+An unhandled exception has occurred while executing the request.
+Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Conflicting method/path combination "POST api/restaurants" for actions - API.Controllers.RestaurantsController.CreateRestaurant (API),API.Controllers.RestaurantsController.CreateRestaurant (API). Actions require a unique method/path combination for Swagger/OpenAPI 3.0. Use ConflictingActionsResolver as a workaround
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperations(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePaths(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerDocumentWithoutFilters(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerAsync(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+[00:29:42 WRN] |Microsoft.EntityFrameworkCore.Model.Validation| 
+The entity type 'Address' is an optional dependent using table sharing without any required non shared property that could be used to identify whether the entity exists. If all nullable properties contain a null value in database then an object instance won't be created in the query. Add a required property to create instances with null values for other properties or mark the incoming navigation as required to always create an instance.
+[00:29:42 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (14ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Restaurants" AS "r")
+[00:29:43 INF] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP GET /swagger/index.html responded 200 in 138.6869 ms
+[00:29:43 INF] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP GET /swagger/v1/swagger.json responded 200 in 167.9033 ms
+[00:40:32 WRN] |Microsoft.EntityFrameworkCore.Model.Validation| 
+The entity type 'Address' is an optional dependent using table sharing without any required non shared property that could be used to identify whether the entity exists. If all nullable properties contain a null value in database then an object instance won't be created in the query. Add a required property to create instances with null values for other properties or mark the incoming navigation as required to always create an instance.
+[00:40:33 ERR] |Microsoft.EntityFrameworkCore.Database.Command| 
+Failed executing DbCommand (30ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Restaurants" AS "r")
+[00:40:33 ERR] |Microsoft.EntityFrameworkCore.Query| 
+An exception occurred while iterating over the results of a query for context type 'Infrastructure.Persistence.RestaurantsDbContext'.
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such table: Restaurants'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.InitializeReader(Enumerator enumerator)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.<>c.<MoveNext>b__21_0(DbContext _, Enumerator enumerator)
+   at Microsoft.EntityFrameworkCore.Storage.NonRetryingExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.MoveNext()
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such table: Restaurants'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.InitializeReader(Enumerator enumerator)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.<>c.<MoveNext>b__21_0(DbContext _, Enumerator enumerator)
+   at Microsoft.EntityFrameworkCore.Storage.NonRetryingExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.MoveNext()
+[00:45:59 WRN] |Microsoft.EntityFrameworkCore.Model.Validation| 
+The entity type 'Address' is an optional dependent using table sharing without any required non shared property that could be used to identify whether the entity exists. If all nullable properties contain a null value in database then an object instance won't be created in the query. Add a required property to create instances with null values for other properties or mark the incoming navigation as required to always create an instance.
+[00:45:59 ERR] |Microsoft.EntityFrameworkCore.Database.Command| 
+Failed executing DbCommand (21ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Restaurants" AS "r")
+[00:45:59 ERR] |Microsoft.EntityFrameworkCore.Query| 
+An exception occurred while iterating over the results of a query for context type 'Infrastructure.Persistence.RestaurantsDbContext'.
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such table: Restaurants'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.InitializeReader(Enumerator enumerator)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.<>c.<MoveNext>b__21_0(DbContext _, Enumerator enumerator)
+   at Microsoft.EntityFrameworkCore.Storage.NonRetryingExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.MoveNext()
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such table: Restaurants'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.InitializeReader(Enumerator enumerator)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.<>c.<MoveNext>b__21_0(DbContext _, Enumerator enumerator)
+   at Microsoft.EntityFrameworkCore.Storage.NonRetryingExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.MoveNext()
+[00:46:19 WRN] |Microsoft.EntityFrameworkCore.Model.Validation| 
+The entity type 'Address' is an optional dependent using table sharing without any required non shared property that could be used to identify whether the entity exists. If all nullable properties contain a null value in database then an object instance won't be created in the query. Add a required property to create instances with null values for other properties or mark the incoming navigation as required to always create an instance.
+[00:46:20 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (48ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Restaurants" AS "r")
+[00:46:34 INF] |Application.Restaurants.Queries.GetRestaurantById.GetRestaurantByIdQueryHandler| 
+Getting restaurant with id 10
+[00:46:34 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (10ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "t"."Id", "t"."Category", "t"."ContactEmail", "t"."ContactNumber", "t"."Description", "t"."HasDelivery", "t"."Name", "t"."Address_City", "t"."Address_PostalCode", "t"."Address_Street", "d"."Id", "d"."Description", "d"."KiloCalories", "d"."Name", "d"."Price", "d"."RestaurantId"
+FROM (
+    SELECT "r"."Id", "r"."Category", "r"."ContactEmail", "r"."ContactNumber", "r"."Description", "r"."HasDelivery", "r"."Name", "r"."Address_City", "r"."Address_PostalCode", "r"."Address_Street"
+    FROM "Restaurants" AS "r"
+    WHERE "r"."Id" = @__id_0
+    LIMIT 1
+) AS "t"
+LEFT JOIN "Dishes" AS "d" ON "t"."Id" = "d"."RestaurantId"
+ORDER BY "t"."Id"
+[00:46:34 INF] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP GET /api/restaurants/10 responded 200 in 956.8153 ms
+[00:46:38 INF] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP GET /api/restaurant/10 responded 404 in 2.1349 ms
+[00:47:17 INF] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP GET /api/restaurant/10 responded 404 in 0.6359 ms
+[14:23:30 WRN] |Microsoft.EntityFrameworkCore.Model.Validation| 
+The entity type 'Address' is an optional dependent using table sharing without any required non shared property that could be used to identify whether the entity exists. If all nullable properties contain a null value in database then an object instance won't be created in the query. Add a required property to create instances with null values for other properties or mark the incoming navigation as required to always create an instance.
+[14:23:31 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (15ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Restaurants" AS "r")
+[14:24:12 INF] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP GET /api/restaurant/101 responded 404 in 29.1205 ms
+[14:24:44 INF] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP GET /api/restaurant/1 responded 404 in 1.5225 ms
+[14:24:51 INF] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP GET /api/restaurant/1 responded 404 in 0.5446 ms
+[14:25:04 INF] |Application.Restaurants.Queries.GetRestaurantById.GetRestaurantByIdQueryHandler| 
+Getting restaurant with id 1
+[14:25:04 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (38ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "t"."Id", "t"."Category", "t"."ContactEmail", "t"."ContactNumber", "t"."Description", "t"."HasDelivery", "t"."Name", "t"."Address_City", "t"."Address_PostalCode", "t"."Address_Street", "d"."Id", "d"."Description", "d"."KiloCalories", "d"."Name", "d"."Price", "d"."RestaurantId"
+FROM (
+    SELECT "r"."Id", "r"."Category", "r"."ContactEmail", "r"."ContactNumber", "r"."Description", "r"."HasDelivery", "r"."Name", "r"."Address_City", "r"."Address_PostalCode", "r"."Address_Street"
+    FROM "Restaurants" AS "r"
+    WHERE "r"."Id" = @__id_0
+    LIMIT 1
+) AS "t"
+LEFT JOIN "Dishes" AS "d" ON "t"."Id" = "d"."RestaurantId"
+ORDER BY "t"."Id"
+[14:25:04 INF] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP GET /api/restaurants/1 responded 200 in 1195.5057 ms
+[14:25:11 INF] |Application.Restaurants.Queries.GetRestaurantById.GetRestaurantByIdQueryHandler| 
+Getting restaurant with id 100
+[14:25:11 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (0ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "t"."Id", "t"."Category", "t"."ContactEmail", "t"."ContactNumber", "t"."Description", "t"."HasDelivery", "t"."Name", "t"."Address_City", "t"."Address_PostalCode", "t"."Address_Street", "d"."Id", "d"."Description", "d"."KiloCalories", "d"."Name", "d"."Price", "d"."RestaurantId"
+FROM (
+    SELECT "r"."Id", "r"."Category", "r"."ContactEmail", "r"."ContactNumber", "r"."Description", "r"."HasDelivery", "r"."Name", "r"."Address_City", "r"."Address_PostalCode", "r"."Address_Street"
+    FROM "Restaurants" AS "r"
+    WHERE "r"."Id" = @__id_0
+    LIMIT 1
+) AS "t"
+LEFT JOIN "Dishes" AS "d" ON "t"."Id" = "d"."RestaurantId"
+ORDER BY "t"."Id"
+[14:25:11 ERR] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP GET /api/restaurants/100 responded 500 in 96.2120 ms
+Domain.Exceptions.NotFoundException: Restaurant with 100 not found
+   at Application.Restaurants.Queries.GetRestaurantById.GetRestaurantByIdQueryHandler.Handle(GetRestaurantByIdQuery request, CancellationToken cancellationToken) in D:\Projects\Restaurants\Application\Restaurants\Queries\GetRestaurantById\GetRestaurantByIdQueryHandler.cs:line 18
+   at API.Controllers.RestaurantsController.GetRestaurant(Int32 id) in D:\Projects\Restaurants\API\Controllers\RestaurantsController.cs:line 26
+   at lambda_method7(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+[14:25:11 WRN] |API.Middleware.ErrorHandlingMiddleware| 
+Restaurant with 100 not found
+[15:01:59 WRN] |Microsoft.EntityFrameworkCore.Model.Validation| 
+The entity type 'Address' is an optional dependent using table sharing without any required non shared property that could be used to identify whether the entity exists. If all nullable properties contain a null value in database then an object instance won't be created in the query. Add a required property to create instances with null values for other properties or mark the incoming navigation as required to always create an instance.
+[15:02:00 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (21ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Restaurants" AS "r")
+[15:02:05 INF] |Application.Restaurants.Queries.GetRestaurantById.GetRestaurantByIdQueryHandler| 
+Getting restaurant with id 100
+[15:02:05 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (10ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "t"."Id", "t"."Category", "t"."ContactEmail", "t"."ContactNumber", "t"."Description", "t"."HasDelivery", "t"."Name", "t"."Address_City", "t"."Address_PostalCode", "t"."Address_Street", "d"."Id", "d"."Description", "d"."KiloCalories", "d"."Name", "d"."Price", "d"."RestaurantId"
+FROM (
+    SELECT "r"."Id", "r"."Category", "r"."ContactEmail", "r"."ContactNumber", "r"."Description", "r"."HasDelivery", "r"."Name", "r"."Address_City", "r"."Address_PostalCode", "r"."Address_Street"
+    FROM "Restaurants" AS "r"
+    WHERE "r"."Id" = @__id_0
+    LIMIT 1
+) AS "t"
+LEFT JOIN "Dishes" AS "d" ON "t"."Id" = "d"."RestaurantId"
+ORDER BY "t"."Id"
+[15:02:05 ERR] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP GET /api/restaurants/100 responded 500 in 649.1559 ms
+Domain.Exceptions.NotFoundException: Restaurant with identifier 100 not found
+   at Application.Restaurants.Queries.GetRestaurantById.GetRestaurantByIdQueryHandler.Handle(GetRestaurantByIdQuery request, CancellationToken cancellationToken) in D:\Projects\Restaurants\Application\Restaurants\Queries\GetRestaurantById\GetRestaurantByIdQueryHandler.cs:line 19
+   at API.Controllers.RestaurantsController.GetRestaurant(Int32 id) in D:\Projects\Restaurants\API\Controllers\RestaurantsController.cs:line 26
+   at lambda_method7(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+[15:02:05 WRN] |API.Middleware.ErrorHandlingMiddleware| 
+Restaurant with identifier 100 not found
+[15:03:20 INF] |Application.Restaurants.Queries.GetRestaurantById.GetRestaurantByIdQueryHandler| 
+Getting restaurant with id 100
+[15:03:20 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (0ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "t"."Id", "t"."Category", "t"."ContactEmail", "t"."ContactNumber", "t"."Description", "t"."HasDelivery", "t"."Name", "t"."Address_City", "t"."Address_PostalCode", "t"."Address_Street", "d"."Id", "d"."Description", "d"."KiloCalories", "d"."Name", "d"."Price", "d"."RestaurantId"
+FROM (
+    SELECT "r"."Id", "r"."Category", "r"."ContactEmail", "r"."ContactNumber", "r"."Description", "r"."HasDelivery", "r"."Name", "r"."Address_City", "r"."Address_PostalCode", "r"."Address_Street"
+    FROM "Restaurants" AS "r"
+    WHERE "r"."Id" = @__id_0
+    LIMIT 1
+) AS "t"
+LEFT JOIN "Dishes" AS "d" ON "t"."Id" = "d"."RestaurantId"
+ORDER BY "t"."Id"
+[15:03:20 ERR] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP GET /api/restaurants/100 responded 500 in 95.9924 ms
+Domain.Exceptions.NotFoundException: Restaurant with identifier 100 not found
+   at Application.Restaurants.Queries.GetRestaurantById.GetRestaurantByIdQueryHandler.Handle(GetRestaurantByIdQuery request, CancellationToken cancellationToken) in D:\Projects\Restaurants\Application\Restaurants\Queries\GetRestaurantById\GetRestaurantByIdQueryHandler.cs:line 19
+   at API.Controllers.RestaurantsController.GetRestaurant(Int32 id) in D:\Projects\Restaurants\API\Controllers\RestaurantsController.cs:line 26
+   at lambda_method7(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+[15:03:20 WRN] |API.Middleware.ErrorHandlingMiddleware| 
+Restaurant with identifier 100 not found
+[18:40:28 WRN] |Microsoft.EntityFrameworkCore.Model.Validation| 
+The entity type 'Address' is an optional dependent using table sharing without any required non shared property that could be used to identify whether the entity exists. If all nullable properties contain a null value in database then an object instance won't be created in the query. Add a required property to create instances with null values for other properties or mark the incoming navigation as required to always create an instance.
+[18:40:28 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (16ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Restaurants" AS "r")
+[19:13:32 WRN] |Microsoft.EntityFrameworkCore.Model.Validation| 
+The entity type 'Address' is an optional dependent using table sharing without any required non shared property that could be used to identify whether the entity exists. If all nullable properties contain a null value in database then an object instance won't be created in the query. Add a required property to create instances with null values for other properties or mark the incoming navigation as required to always create an instance.
+[19:13:33 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (20ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Restaurants" AS "r")
+[19:14:05 INF] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP GET /api/api/restaurant/1/dishes responded 404 in 28.5557 ms
+[19:14:24 INF] |Application.Dishes.Queries.GetAllDishes.GetDishesForRestaurantQueryHandler| 
+Getting dishes for restaurant 1
+[19:14:24 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (9ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "t"."Id", "t"."Category", "t"."ContactEmail", "t"."ContactNumber", "t"."Description", "t"."HasDelivery", "t"."Name", "t"."Address_City", "t"."Address_PostalCode", "t"."Address_Street", "d"."Id", "d"."Description", "d"."KiloCalories", "d"."Name", "d"."Price", "d"."RestaurantId"
+FROM (
+    SELECT "r"."Id", "r"."Category", "r"."ContactEmail", "r"."ContactNumber", "r"."Description", "r"."HasDelivery", "r"."Name", "r"."Address_City", "r"."Address_PostalCode", "r"."Address_Street"
+    FROM "Restaurants" AS "r"
+    WHERE "r"."Id" = @__id_0
+    LIMIT 1
+) AS "t"
+LEFT JOIN "Dishes" AS "d" ON "t"."Id" = "d"."RestaurantId"
+ORDER BY "t"."Id"
+[19:14:24 INF] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP GET /api/restaurant/1/dishes responded 200 in 889.3710 ms
+[19:14:33 INF] |Application.Dishes.Queries.GetDish.GetDishByIdForRestaurantQueryHandler| 
+Getting dish for restaurant 1 with the Id of 1
+[19:14:33 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (0ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "t"."Id", "t"."Category", "t"."ContactEmail", "t"."ContactNumber", "t"."Description", "t"."HasDelivery", "t"."Name", "t"."Address_City", "t"."Address_PostalCode", "t"."Address_Street", "d"."Id", "d"."Description", "d"."KiloCalories", "d"."Name", "d"."Price", "d"."RestaurantId"
+FROM (
+    SELECT "r"."Id", "r"."Category", "r"."ContactEmail", "r"."ContactNumber", "r"."Description", "r"."HasDelivery", "r"."Name", "r"."Address_City", "r"."Address_PostalCode", "r"."Address_Street"
+    FROM "Restaurants" AS "r"
+    WHERE "r"."Id" = @__id_0
+    LIMIT 1
+) AS "t"
+LEFT JOIN "Dishes" AS "d" ON "t"."Id" = "d"."RestaurantId"
+ORDER BY "t"."Id"
+[19:14:33 INF] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP GET /api/restaurant/1/dishes/1 responded 200 in 105.0975 ms
+[19:22:46 INF] |Application.Dishes.Queries.GetDish.GetDishByIdForRestaurantQueryHandler| 
+Getting dish for restaurant 1 with the Id of 10
+[19:22:46 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "t"."Id", "t"."Category", "t"."ContactEmail", "t"."ContactNumber", "t"."Description", "t"."HasDelivery", "t"."Name", "t"."Address_City", "t"."Address_PostalCode", "t"."Address_Street", "d"."Id", "d"."Description", "d"."KiloCalories", "d"."Name", "d"."Price", "d"."RestaurantId"
+FROM (
+    SELECT "r"."Id", "r"."Category", "r"."ContactEmail", "r"."ContactNumber", "r"."Description", "r"."HasDelivery", "r"."Name", "r"."Address_City", "r"."Address_PostalCode", "r"."Address_Street"
+    FROM "Restaurants" AS "r"
+    WHERE "r"."Id" = @__id_0
+    LIMIT 1
+) AS "t"
+LEFT JOIN "Dishes" AS "d" ON "t"."Id" = "d"."RestaurantId"
+ORDER BY "t"."Id"
+[19:22:46 ERR] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP GET /api/restaurant/1/dishes/10 responded 500 in 25.4461 ms
+Domain.Exceptions.NotFoundException: Dish with identifier 10 not found
+   at Application.Dishes.Queries.GetDish.GetDishByIdForRestaurantQueryHandler.Handle(GetDishByIdForRestaurantQuery request, CancellationToken cancellationToken) in D:\Projects\Restaurants\Application\Dishes\Queries\GetDish\GetDishByIdForRestaurantQueryHandler.cs:line 23
+   at API.Controllers.DishesController.GetDish(Int32 restaurantId, Int32 dishId) in D:\Projects\Restaurants\API\Controllers\DishesController.cs:line 24
+   at lambda_method133(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+[19:22:46 WRN] |API.Middleware.ErrorHandlingMiddleware| 
+Dish with identifier 10 not found
+[19:23:19 INF] |Application.Dishes.Queries.GetDish.GetDishByIdForRestaurantQueryHandler| 
+Getting dish for restaurant 1 with the Id of 1
+[19:23:19 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (0ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "t"."Id", "t"."Category", "t"."ContactEmail", "t"."ContactNumber", "t"."Description", "t"."HasDelivery", "t"."Name", "t"."Address_City", "t"."Address_PostalCode", "t"."Address_Street", "d"."Id", "d"."Description", "d"."KiloCalories", "d"."Name", "d"."Price", "d"."RestaurantId"
+FROM (
+    SELECT "r"."Id", "r"."Category", "r"."ContactEmail", "r"."ContactNumber", "r"."Description", "r"."HasDelivery", "r"."Name", "r"."Address_City", "r"."Address_PostalCode", "r"."Address_Street"
+    FROM "Restaurants" AS "r"
+    WHERE "r"."Id" = @__id_0
+    LIMIT 1
+) AS "t"
+LEFT JOIN "Dishes" AS "d" ON "t"."Id" = "d"."RestaurantId"
+ORDER BY "t"."Id"
+[19:23:19 INF] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP GET /api/restaurant/1/dishes/1 responded 200 in 15.9016 ms
+[19:48:07 WRN] |Microsoft.EntityFrameworkCore.Model.Validation| 
+The entity type 'Address' is an optional dependent using table sharing without any required non shared property that could be used to identify whether the entity exists. If all nullable properties contain a null value in database then an object instance won't be created in the query. Add a required property to create instances with null values for other properties or mark the incoming navigation as required to always create an instance.
+[19:48:07 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (28ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Restaurants" AS "r")
+[19:48:26 INF] |Application.Dishes.Queries.GetDish.GetDishByIdForRestaurantQueryHandler| 
+Deleting dish 1 for restaurant 1
+[19:48:26 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (23ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "t"."Id", "t"."Category", "t"."ContactEmail", "t"."ContactNumber", "t"."Description", "t"."HasDelivery", "t"."Name", "t"."Address_City", "t"."Address_PostalCode", "t"."Address_Street", "d"."Id", "d"."Description", "d"."KiloCalories", "d"."Name", "d"."Price", "d"."RestaurantId"
+FROM (
+    SELECT "r"."Id", "r"."Category", "r"."ContactEmail", "r"."ContactNumber", "r"."Description", "r"."HasDelivery", "r"."Name", "r"."Address_City", "r"."Address_PostalCode", "r"."Address_Street"
+    FROM "Restaurants" AS "r"
+    WHERE "r"."Id" = @__id_0
+    LIMIT 1
+) AS "t"
+LEFT JOIN "Dishes" AS "d" ON "t"."Id" = "d"."RestaurantId"
+ORDER BY "t"."Id"
+[19:48:27 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (0ms) [Parameters=[@p0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+DELETE FROM "Dishes"
+WHERE "Id" = @p0
+RETURNING 1;
+[19:48:27 INF] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP DELETE /api/restaurant/1/dishes/1 responded 204 in 1177.4682 ms
+[19:48:33 INF] |Application.Dishes.Queries.GetDish.GetDishByIdForRestaurantQueryHandler| 
+Getting dish for restaurant 1 with the Id of 1
+[19:48:33 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (0ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "t"."Id", "t"."Category", "t"."ContactEmail", "t"."ContactNumber", "t"."Description", "t"."HasDelivery", "t"."Name", "t"."Address_City", "t"."Address_PostalCode", "t"."Address_Street", "d"."Id", "d"."Description", "d"."KiloCalories", "d"."Name", "d"."Price", "d"."RestaurantId"
+FROM (
+    SELECT "r"."Id", "r"."Category", "r"."ContactEmail", "r"."ContactNumber", "r"."Description", "r"."HasDelivery", "r"."Name", "r"."Address_City", "r"."Address_PostalCode", "r"."Address_Street"
+    FROM "Restaurants" AS "r"
+    WHERE "r"."Id" = @__id_0
+    LIMIT 1
+) AS "t"
+LEFT JOIN "Dishes" AS "d" ON "t"."Id" = "d"."RestaurantId"
+ORDER BY "t"."Id"
+[19:48:33 ERR] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP GET /api/restaurant/1/dishes/1 responded 500 in 114.0100 ms
+Domain.Exceptions.NotFoundException: Dish with identifier 1 not found
+   at Application.Dishes.Queries.GetDish.GetDishByIdForRestaurantQueryHandler.Handle(GetDishByIdForRestaurantQuery request, CancellationToken cancellationToken) in D:\Projects\Restaurants\Application\Dishes\Queries\GetDish\GetDishByIdForRestaurantQueryHandler.cs:line 23
+   at API.Controllers.DishesController.GetDish(Int32 restaurantId, Int32 dishId) in D:\Projects\Restaurants\API\Controllers\DishesController.cs:line 25
+   at lambda_method210(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+[19:48:33 WRN] |API.Middleware.ErrorHandlingMiddleware| 
+Dish with identifier 1 not found
+[19:48:38 INF] |Application.Dishes.Queries.GetAllDishes.GetDishesForRestaurantQueryHandler| 
+Getting dishes for restaurant 1
+[19:48:38 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (0ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "t"."Id", "t"."Category", "t"."ContactEmail", "t"."ContactNumber", "t"."Description", "t"."HasDelivery", "t"."Name", "t"."Address_City", "t"."Address_PostalCode", "t"."Address_Street", "d"."Id", "d"."Description", "d"."KiloCalories", "d"."Name", "d"."Price", "d"."RestaurantId"
+FROM (
+    SELECT "r"."Id", "r"."Category", "r"."ContactEmail", "r"."ContactNumber", "r"."Description", "r"."HasDelivery", "r"."Name", "r"."Address_City", "r"."Address_PostalCode", "r"."Address_Street"
+    FROM "Restaurants" AS "r"
+    WHERE "r"."Id" = @__id_0
+    LIMIT 1
+) AS "t"
+LEFT JOIN "Dishes" AS "d" ON "t"."Id" = "d"."RestaurantId"
+ORDER BY "t"."Id"
+[19:48:38 INF] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP GET /api/restaurant/1/dishes/ responded 200 in 93.9935 ms
