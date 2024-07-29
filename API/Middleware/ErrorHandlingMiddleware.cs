@@ -17,6 +17,12 @@ public class ErrorHandlingMiddleware(ILogger<ErrorHandlingMiddleware> logger) : 
             await context.Response.WriteAsync(notFound.Message);
             logger.LogWarning(notFound.Message);
         }
+        catch (ForbiddenException forbiddenException)
+        {
+            context.Response.StatusCode = (int)HttpStatusCode.Forbidden;
+            await context.Response.WriteAsync(forbiddenException.Message);
+            logger.LogWarning(forbiddenException.Message);
+        }
         catch (Exception ex)
         {
             logger.LogError(ex, ex.Message);

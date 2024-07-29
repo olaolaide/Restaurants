@@ -4,7 +4,7 @@ using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 
-namespace Application.Users.Commands;
+namespace Application.Users.Commands.UpdateUserDetails;
 
 public class UpdateUserDetailsCommandHandler(
     ILogger<UpdateUserDetailsCommandHandler> logger,

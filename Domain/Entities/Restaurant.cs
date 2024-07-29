@@ -12,4 +12,7 @@ public class Restaurant
 
     public Address? Address { get; set; }
     public List<Dish> Dishes { get; set; } = [];
+
+    public required User Owner { get; set; }
+    public required string OwnerId { get; set; }
 }

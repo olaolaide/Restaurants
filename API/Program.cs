@@ -25,8 +25,8 @@ app.UseSerilogRequestLogging();
 
 app.UseSwagger();
 app.UseSwaggerUI();
-app.MapGroup("/api/identity").MapIdentityApi<User>();
-app.UseAuthentication(); // Ensure that authentication is enabled
+app.MapGroup("/api/identity").WithTags("Identity").MapIdentityApi<User>();
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
