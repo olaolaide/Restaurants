@@ -830,3 +830,104 @@ Executed DbCommand (33ms) [Parameters=[], CommandType='"Text"', CommandTimeout='
 SELECT EXISTS (
     SELECT 1
     FROM "Restaurants" AS "r")
+[22:07:12 WRN] |Microsoft.EntityFrameworkCore.Model.Validation| 
+The entity type 'Address' is an optional dependent using table sharing without any required non shared property that could be used to identify whether the entity exists. If all nullable properties contain a null value in database then an object instance won't be created in the query. Add a required property to create instances with null values for other properties or mark the incoming navigation as required to always create an instance.
+[22:07:12 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (66ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Restaurants" AS "r")
+[22:07:18 INF] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP GET /swagger/index.html responded 200 in 164.5360 ms
+[22:07:19 INF] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP GET /swagger/v1/swagger.json responded 200 in 238.4874 ms
+[22:24:40 WRN] |Microsoft.EntityFrameworkCore.Model.Validation| 
+The entity type 'Address' is an optional dependent using table sharing without any required non shared property that could be used to identify whether the entity exists. If all nullable properties contain a null value in database then an object instance won't be created in the query. Add a required property to create instances with null values for other properties or mark the incoming navigation as required to always create an instance.
+[22:25:17 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (3,065ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Restaurants" AS "r")
+[22:25:56 INF] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP GET /swagger/index.html responded 200 in 1507.6598 ms
+[22:25:59 INF] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP GET /swagger/v1/swagger.json responded 200 in 2909.7138 ms
+[22:57:51 WRN] |Microsoft.EntityFrameworkCore.Model.Validation| 
+The entity type 'Address' is an optional dependent using table sharing without any required non shared property that could be used to identify whether the entity exists. If all nullable properties contain a null value in database then an object instance won't be created in the query. Add a required property to create instances with null values for other properties or mark the incoming navigation as required to always create an instance.
+[22:57:51 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (15ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Restaurants" AS "r")
+[22:58:29 INF] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP GET /swagger/index.html responded 200 in 1008.1412 ms
+[22:58:29 INF] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP GET /swagger/v1/swagger.json responded 200 in 241.1649 ms
+[22:58:58 INF] |Application.Dishes.Queries.GetAllDishes.GetDishesForRestaurantQueryHandler| 
+Getting dishes for restaurant 1
+[22:58:59 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (195ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "t"."Id", "t"."Category", "t"."ContactEmail", "t"."ContactNumber", "t"."Description", "t"."HasDelivery", "t"."Name", "t"."Address_City", "t"."Address_PostalCode", "t"."Address_Street", "d"."Id", "d"."Description", "d"."KiloCalories", "d"."Name", "d"."Price", "d"."RestaurantId"
+FROM (
+    SELECT "r"."Id", "r"."Category", "r"."ContactEmail", "r"."ContactNumber", "r"."Description", "r"."HasDelivery", "r"."Name", "r"."Address_City", "r"."Address_PostalCode", "r"."Address_Street"
+    FROM "Restaurants" AS "r"
+    WHERE "r"."Id" = @__id_0
+    LIMIT 1
+) AS "t"
+LEFT JOIN "Dishes" AS "d" ON "t"."Id" = "d"."RestaurantId"
+ORDER BY "t"."Id"
+[22:59:00 INF] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP GET /api/restaurant/1/dishes responded 200 in 2161.5535 ms
+[23:05:06 WRN] |Microsoft.EntityFrameworkCore.Model.Validation| 
+The entity type 'Address' is an optional dependent using table sharing without any required non shared property that could be used to identify whether the entity exists. If all nullable properties contain a null value in database then an object instance won't be created in the query. Add a required property to create instances with null values for other properties or mark the incoming navigation as required to always create an instance.
+[23:05:06 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (16ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Restaurants" AS "r")
+[23:08:11 INF] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP GET /swagger/index.html responded 200 in 206.5480 ms
+[23:08:11 INF] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP GET /swagger/v1/swagger.json responded 200 in 253.4311 ms
+[23:16:24 WRN] |Microsoft.EntityFrameworkCore.Model.Validation| 
+The entity type 'Address' is an optional dependent using table sharing without any required non shared property that could be used to identify whether the entity exists. If all nullable properties contain a null value in database then an object instance won't be created in the query. Add a required property to create instances with null values for other properties or mark the incoming navigation as required to always create an instance.
+[23:16:24 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (19ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Restaurants" AS "r")
+[23:16:41 INF] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP POST /api/identity/register responded 400 in 166.1902 ms
+[23:17:01 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (24ms) [Parameters=[@__normalizedUserName_0='?' (Size = 14)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a"."Id", "a"."AccessFailedCount", "a"."ConcurrencyStamp", "a"."Email", "a"."EmailConfirmed", "a"."FirstName", "a"."LastName", "a"."LockoutEnabled", "a"."LockoutEnd", "a"."NormalizedEmail", "a"."NormalizedUserName", "a"."PasswordHash", "a"."PhoneNumber", "a"."PhoneNumberConfirmed", "a"."SecurityStamp", "a"."TwoFactorEnabled", "a"."UserName"
+FROM "AspNetUsers" AS "a"
+WHERE "a"."NormalizedUserName" = @__normalizedUserName_0
+LIMIT 1
+[23:17:01 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (95ms) [Parameters=[@p0='?' (Size = 36), @p1='?' (DbType = Int32), @p2='?' (Size = 36), @p3='?' (Size = 14), @p4='?' (DbType = Boolean), @p5='?', @p6='?', @p7='?' (DbType = Boolean), @p8='?' (DbType = DateTimeOffset), @p9='?' (Size = 14), @p10='?' (Size = 14), @p11='?' (Size = 84), @p12='?', @p13='?' (DbType = Boolean), @p14='?' (Size = 32), @p15='?' (DbType = Boolean), @p16='?' (Size = 14)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "AspNetUsers" ("Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16);
+[23:17:01 INF] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP POST /api/identity/register responded 200 in 921.2318 ms
+[23:18:18 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (1ms) [Parameters=[@__normalizedUserName_0='?' (Size = 14)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a"."Id", "a"."AccessFailedCount", "a"."ConcurrencyStamp", "a"."Email", "a"."EmailConfirmed", "a"."FirstName", "a"."LastName", "a"."LockoutEnabled", "a"."LockoutEnd", "a"."NormalizedEmail", "a"."NormalizedUserName", "a"."PasswordHash", "a"."PhoneNumber", "a"."PhoneNumberConfirmed", "a"."SecurityStamp", "a"."TwoFactorEnabled", "a"."UserName"
+FROM "AspNetUsers" AS "a"
+WHERE "a"."NormalizedUserName" = @__normalizedUserName_0
+LIMIT 1
+[23:18:18 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (15ms) [Parameters=[@__user_Id_0='?' (Size = 36)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a"."Id", "a"."ClaimType", "a"."ClaimValue", "a"."UserId"
+FROM "AspNetUserClaims" AS "a"
+WHERE "a"."UserId" = @__user_Id_0
+[23:18:18 INF] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP POST /api/identity/login responded 200 in 295.2442 ms
+[23:19:24 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (0ms) [Parameters=[@__p_0='?' (Size = 36)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a"."Id", "a"."AccessFailedCount", "a"."ConcurrencyStamp", "a"."Email", "a"."EmailConfirmed", "a"."FirstName", "a"."LastName", "a"."LockoutEnabled", "a"."LockoutEnd", "a"."NormalizedEmail", "a"."NormalizedUserName", "a"."PasswordHash", "a"."PhoneNumber", "a"."PhoneNumberConfirmed", "a"."SecurityStamp", "a"."TwoFactorEnabled", "a"."UserName"
+FROM "AspNetUsers" AS "a"
+WHERE "a"."Id" = @__p_0
+LIMIT 1
+[23:19:24 INF] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP GET /api/identity/manage/info responded 200 in 63.5620 ms

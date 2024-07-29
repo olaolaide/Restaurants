@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using MediatR;
 
-namespace Domain.Entities;
+namespace Application.Users.Commands;
 
-public class User : IdentityUser
+public class UpdateUserDetailsCommand : IRequest
 {
     public string? FirstName { get; set; }
     public string? LastName { get; set; }

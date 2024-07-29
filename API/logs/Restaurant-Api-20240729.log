@@ -1,0 +1,107 @@
+[00:46:43 WRN] |Microsoft.EntityFrameworkCore.Model.Validation| 
+The entity type 'Address' is an optional dependent using table sharing without any required non shared property that could be used to identify whether the entity exists. If all nullable properties contain a null value in database then an object instance won't be created in the query. Add a required property to create instances with null values for other properties or mark the incoming navigation as required to always create an instance.
+[00:46:43 WRN] |Microsoft.EntityFrameworkCore.Model.Validation| 
+The entity type 'Address' is an optional dependent using table sharing without any required non shared property that could be used to identify whether the entity exists. If all nullable properties contain a null value in database then an object instance won't be created in the query. Add a required property to create instances with null values for other properties or mark the incoming navigation as required to always create an instance.
+[00:49:19 WRN] |Microsoft.EntityFrameworkCore.Model.Validation| 
+The entity type 'Address' is an optional dependent using table sharing without any required non shared property that could be used to identify whether the entity exists. If all nullable properties contain a null value in database then an object instance won't be created in the query. Add a required property to create instances with null values for other properties or mark the incoming navigation as required to always create an instance.
+[00:49:20 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (27ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*) FROM "sqlite_master" WHERE "name" = '__EFMigrationsHistory' AND "type" = 'table';
+[00:49:20 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*) FROM "sqlite_master" WHERE "name" = '__EFMigrationsHistory' AND "type" = 'table';
+[00:49:20 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+[00:49:20 INF] |Microsoft.EntityFrameworkCore.Migrations| 
+Applying migration '20240728234646_updated user'.
+[00:49:20 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE "AspNetUsers" ADD "DateOfBirth" TEXT NULL;
+[00:49:20 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE "AspNetUsers" ADD "Nationality" TEXT NULL;
+[00:49:20 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "ef_temp_Restaurants" (
+    "Id" INTEGER NOT NULL CONSTRAINT "PK_Restaurants" PRIMARY KEY AUTOINCREMENT,
+    "Address_City" TEXT NULL,
+    "Address_PostalCode" TEXT NULL,
+    "Address_Street" TEXT NULL,
+    "Category" TEXT NOT NULL,
+    "ContactEmail" TEXT NULL,
+    "ContactNumber" TEXT NULL,
+    "Description" TEXT NOT NULL,
+    "HasDelivery" INTEGER NOT NULL,
+    "Name" TEXT NOT NULL
+);
+[00:49:20 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "ef_temp_Restaurants" ("Id", "Address_City", "Address_PostalCode", "Address_Street", "Category", "ContactEmail", "ContactNumber", "Description", "HasDelivery", "Name")
+SELECT "Id", "Address_City", "Address_PostalCode", "Address_Street", "Category", "ContactEmail", "ContactNumber", "Description", "HasDelivery", "Name"
+FROM "Restaurants";
+[00:49:20 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+PRAGMA foreign_keys = 0;
+[00:49:20 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DROP TABLE "Restaurants";
+[00:49:20 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE "ef_temp_Restaurants" RENAME TO "Restaurants";
+[00:49:20 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+PRAGMA foreign_keys = 1;
+[00:49:20 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20240728234646_updated user', '8.0.7');
+[01:23:14 WRN] |Microsoft.EntityFrameworkCore.Model.Validation| 
+The entity type 'Address' is an optional dependent using table sharing without any required non shared property that could be used to identify whether the entity exists. If all nullable properties contain a null value in database then an object instance won't be created in the query. Add a required property to create instances with null values for other properties or mark the incoming navigation as required to always create an instance.
+[01:23:15 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (17ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Restaurants" AS "r")
+[01:25:32 INF] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP GET /swagger/index.html responded 200 in 228.1848 ms
+[01:25:33 INF] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP GET /swagger/v1/swagger.json responded 200 in 262.5937 ms
+[01:26:05 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (45ms) [Parameters=[@__normalizedUserName_0='?' (Size = 14)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a"."Id", "a"."AccessFailedCount", "a"."ConcurrencyStamp", "a"."DateOfBirth", "a"."Email", "a"."EmailConfirmed", "a"."FirstName", "a"."LastName", "a"."LockoutEnabled", "a"."LockoutEnd", "a"."Nationality", "a"."NormalizedEmail", "a"."NormalizedUserName", "a"."PasswordHash", "a"."PhoneNumber", "a"."PhoneNumberConfirmed", "a"."SecurityStamp", "a"."TwoFactorEnabled", "a"."UserName"
+FROM "AspNetUsers" AS "a"
+WHERE "a"."NormalizedUserName" = @__normalizedUserName_0
+LIMIT 1
+[01:26:05 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (10ms) [Parameters=[@__user_Id_0='?' (Size = 36)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a"."Id", "a"."ClaimType", "a"."ClaimValue", "a"."UserId"
+FROM "AspNetUserClaims" AS "a"
+WHERE "a"."UserId" = @__user_Id_0
+[01:26:05 INF] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP POST /api/identity/login responded 200 in 751.3706 ms
+[01:26:44 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (1ms) [Parameters=[@__p_0='?' (Size = 36)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a"."Id", "a"."AccessFailedCount", "a"."ConcurrencyStamp", "a"."DateOfBirth", "a"."Email", "a"."EmailConfirmed", "a"."FirstName", "a"."LastName", "a"."LockoutEnabled", "a"."LockoutEnd", "a"."Nationality", "a"."NormalizedEmail", "a"."NormalizedUserName", "a"."PasswordHash", "a"."PhoneNumber", "a"."PhoneNumberConfirmed", "a"."SecurityStamp", "a"."TwoFactorEnabled", "a"."UserName"
+FROM "AspNetUsers" AS "a"
+WHERE "a"."Id" = @__p_0
+LIMIT 1
+[01:26:44 INF] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP POST /api/identity/manage/info responded 400 in 187.6249 ms
+[01:27:35 INF] |Application.Users.Commands.UpdateUserDetailsCommandHandler| 
+Updating user details for feb28812-12d9-406a-a9db-a5c8cd0f7484
+[01:27:35 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (0ms) [Parameters=[@__p_0='?' (Size = 36)], CommandType='"Text"', CommandTimeout='30']
+SELECT "a"."Id", "a"."AccessFailedCount", "a"."ConcurrencyStamp", "a"."DateOfBirth", "a"."Email", "a"."EmailConfirmed", "a"."FirstName", "a"."LastName", "a"."LockoutEnabled", "a"."LockoutEnd", "a"."Nationality", "a"."NormalizedEmail", "a"."NormalizedUserName", "a"."PasswordHash", "a"."PhoneNumber", "a"."PhoneNumberConfirmed", "a"."SecurityStamp", "a"."TwoFactorEnabled", "a"."UserName"
+FROM "AspNetUsers" AS "a"
+WHERE "a"."Id" = @__p_0
+LIMIT 1
+[01:27:35 INF] |Microsoft.EntityFrameworkCore.Database.Command| 
+Executed DbCommand (56ms) [Parameters=[@p18='?' (Size = 36), @p0='?' (DbType = Int32), @p1='?' (Size = 36), @p19='?' (Size = 36), @p2='?' (DbType = Date), @p3='?' (Size = 14), @p4='?' (DbType = Boolean), @p5='?' (Size = 4), @p6='?' (Size = 5), @p7='?' (DbType = Boolean), @p8='?' (DbType = DateTimeOffset), @p9='?' (Size = 8), @p10='?' (Size = 14), @p11='?' (Size = 14), @p12='?' (Size = 84), @p13='?', @p14='?' (DbType = Boolean), @p15='?' (Size = 32), @p16='?' (DbType = Boolean), @p17='?' (Size = 14)], CommandType='"Text"', CommandTimeout='30']
+UPDATE "AspNetUsers" SET "AccessFailedCount" = @p0, "ConcurrencyStamp" = @p1, "DateOfBirth" = @p2, "Email" = @p3, "EmailConfirmed" = @p4, "FirstName" = @p5, "LastName" = @p6, "LockoutEnabled" = @p7, "LockoutEnd" = @p8, "Nationality" = @p9, "NormalizedEmail" = @p10, "NormalizedUserName" = @p11, "PasswordHash" = @p12, "PhoneNumber" = @p13, "PhoneNumberConfirmed" = @p14, "SecurityStamp" = @p15, "TwoFactorEnabled" = @p16, "UserName" = @p17
+WHERE "Id" = @p18 AND "ConcurrencyStamp" = @p19
+RETURNING 1;
+[01:27:35 INF] |Serilog.AspNetCore.RequestLoggingMiddleware| 
+HTTP PATCH /api/identity/user responded 204 in 560.5104 ms

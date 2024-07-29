@@ -5,15 +5,18 @@ using Application.Restaurants.DTOs;
 using Application.Restaurants.Queries.GetAllRestaurants;
 using Application.Restaurants.Queries.GetRestaurantById;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
 
 [ApiController]
 [Route("api/restaurants")]
+[Authorize]
 public class RestaurantsController(IMediator mediator) : ControllerBase
 {
     [HttpGet]
+    [AllowAnonymous]
     public async Task<ActionResult<List<RestaurantDto>>> GetRestaurants()
     {
         var restaurants = await mediator.Send(new GetAllRestaurantsQuery());
